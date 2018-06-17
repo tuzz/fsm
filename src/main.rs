@@ -1,3 +1,9 @@
+extern crate stdweb;
+
+mod webpage;
+
+use webpage::Webpage;
+
 fn main() {
-    println!("Hello, world!");
+    let _ = Webpage::new("FSM");
 }
