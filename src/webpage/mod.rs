@@ -1,3 +1,5 @@
+pub mod prelude;
+
 mod webgl;
 
 use stdweb::web;
