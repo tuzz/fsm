@@ -1,3 +1,5 @@
+mod webgl;
+
 use stdweb::web;
 use stdweb::web::event;
 use stdweb::web::html_element;
@@ -5,7 +7,7 @@ use stdweb::unstable::TryInto;
 use stdweb::traits::*;
 
 pub struct Webpage {
-
+    pub context: webgl::WebGLRenderingContext,
 }
 
 impl Webpage {
@@ -22,7 +24,7 @@ impl Webpage {
         Self::resize_canvas(&body, &canvas);
         Self::bind_resize_event(&window, &body, &canvas);
 
-        Webpage { }
+        Webpage { context }
     }
 
     fn fetch_window() -> web::Window {
@@ -42,7 +44,7 @@ impl Webpage {
         canvas.try_into().expect("failed to convert element to canvas")
     }
 
-    fn fetch_context(canvas: &html_element::CanvasElement) -> web::CanvasRenderingContext2d {
+    fn fetch_context(canvas: &html_element::CanvasElement) -> webgl::WebGLRenderingContext {
         canvas.get_context().expect("failed to fetch render context")
     }
 

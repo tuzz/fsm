@@ -5,3 +5,9 @@ authors = ["Chris Patuzzo <chris@patuzzo.co.uk>"]
 
 [dependencies]
 stdweb = "0.4.6"
+stdweb-derive = "0.4.0"
+serde = "1.0.0"
+serde_derive = "1.0.0"
+
+[build-dependencies]
+webgl_generator = "0.1.0"

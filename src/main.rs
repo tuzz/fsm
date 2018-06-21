@@ -1,4 +1,6 @@
-extern crate stdweb;
+#[macro_use] extern crate stdweb;
+#[macro_use] extern crate stdweb_derive;
+#[macro_use] extern crate serde_derive;
 
 mod webpage;
 
