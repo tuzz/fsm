@@ -1,3 +1,4 @@
+#[macro_use] extern crate prismatic;
 #[macro_use] extern crate stdweb;
 #[macro_use] extern crate stdweb_derive;
 #[macro_use] extern crate serde_derive;
@@ -8,7 +9,7 @@ use webpage::prelude::*;
 
 fn main() {
     let webpage = Webpage::new("FSM");
-    let context = webpage.context;
+    let context = webpage.context();
 
     let vert_code = include_str!("shader.vert");
     let frag_code = include_str!("shader.frag");
