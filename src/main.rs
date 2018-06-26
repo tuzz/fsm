@@ -9,6 +9,11 @@ use webpage::prelude::*;
 
 fn main() {
     let webpage = Webpage::new("FSM");
+
+    webpage.animate(|delta, elapsed| {
+        console!(log, format!("delta: {}, elapsed: {}", delta, elapsed));
+    });
+
     let context = webpage.context();
 
     let vert_code = include_str!("shader.vert");

@@ -11,7 +11,6 @@ use stdweb::traits::*;
 #[Sig = "title: &str"]
 #[allow(dead_code)]
 pub struct Webpage {
-    window: web::Window,
     document: web::Document,
     body: web::HtmlElement,
     canvas: html_element::CanvasElement,
@@ -21,7 +20,6 @@ pub struct Webpage {
 
 impl Init {
     fn init(&mut self, title: &str) {
-        self.fetch_window();
         self.fetch_document();
         self.fetch_body();
         self.create_canvas();
@@ -33,10 +31,6 @@ impl Init {
         self.add_canvas_to_page();
         self.add_style_to_page();
         self.resize_canvas();
-    }
-
-    fn fetch_window(&mut self) {
-        self.set_window(web::window());
     }
 
     fn fetch_document(&mut self) {
@@ -111,5 +105,19 @@ impl Init {
 impl Webpage {
     pub fn context(&self) -> &webgl::WebGLRenderingContext {
         &self.context
+    }
+
+    pub fn animate<F: Fn(f64, f64) + 'static>(&self, callback: F) {
+        Self::animate_recursive(callback, 0.0);
+    }
+
+    pub fn animate_recursive<F: Fn(f64, f64) + 'static>(callback: F, previous: f64) {
+        web::window().request_animation_frame(move |mut elapsed| {
+            elapsed *= 0.001;
+            let delta = elapsed - previous;
+
+            callback(delta, elapsed);
+            Self::animate_recursive(callback, elapsed);
+        });
     }
 }
