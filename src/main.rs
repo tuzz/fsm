@@ -34,9 +34,9 @@ fn main() {
     let buffer = context.create_buffer().unwrap();
 
     let vertices = TypedArray::<f32>::from(&[
-        0.0, 0.0,
-        0.0, 0.5,
-        0.7, 0.0,
+        -0.5, 0.0,
+        0.0, 0.8,
+        0.7, -0.5,
     ][..]).buffer();
 
     context.bind_buffer(GL::ARRAY_BUFFER, Some(&buffer));
